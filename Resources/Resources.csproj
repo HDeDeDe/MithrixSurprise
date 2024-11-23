@@ -12,6 +12,7 @@
         <Content Include="..\README.md">
           <Link>README.md</Link>
         </Content>
+        <Content Include="confirmation.png" />
         <Content Include="icon.png" />
     </ItemGroup>
 </Project>
