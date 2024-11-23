@@ -19,7 +19,8 @@ namespace MithrixSurprise
 		public void Awake()
 		{
 			RoRConfig = new ConfigFile(Paths.ConfigPath + "\\MithrixSurprise.cfg", true);
-			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.5f, "Mithrix spawn chance.");
+			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.5f,
+				"Mithrix spawn chance.");
 			
 			if (!System.IO.File.Exists(Paths.ConfigPath + "\\MithrixSurpriseFirstRun.cfg")) {
 				// ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -32,7 +33,8 @@ namespace MithrixSurprise
 			On.RoR2.PurchaseInteraction.OnInteractionBegin += PurchaseInteraction_OnInteractionBegin;
 		}
 		
-		private static void PurchaseInteraction_OnInteractionBegin(On.RoR2.PurchaseInteraction.orig_OnInteractionBegin orig, PurchaseInteraction self, Interactor activator)
+		private static void PurchaseInteraction_OnInteractionBegin(On.RoR2.PurchaseInteraction.orig_OnInteractionBegin orig, 
+			PurchaseInteraction self, Interactor activator)
 		{
 			if (self.CanBeAffordedByInteractor(activator))
 			{
@@ -56,16 +58,15 @@ namespace MithrixSurprise
 				spawnOnTarget = coreTransform,
 				placementMode = DirectorPlacementRule.PlacementMode.NearestNode
 			};
-			DirectorCore.GetMonsterSpawnDistance(input, out directorPlacementRule.minDistance, out directorPlacementRule.maxDistance);
-			GameObject gameObject = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, directorPlacementRule, RoR2Application.rng)
+			DirectorCore.GetMonsterSpawnDistance(input, out directorPlacementRule.minDistance, 
+				out directorPlacementRule.maxDistance);
+			GameObject gameObject = DirectorCore.instance.TrySpawnObject(new DirectorSpawnRequest(spawnCard, 
+				directorPlacementRule, RoR2Application.rng)
 			{
 				teamIndexOverride = TeamIndex.Monster
 			});
 			gameObject.GetComponent<CharacterMaster>().isBoss = true;
-			if (!gameObject)
-			{
-				return;
-			}
+			if (!gameObject) return;
 			NetworkServer.Spawn(gameObject);
 		}
 	}
