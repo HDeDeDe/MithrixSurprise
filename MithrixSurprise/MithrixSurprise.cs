@@ -11,19 +11,20 @@ namespace MithrixSurprise
 	[BepInPlugin("com.Nuxlar.MithrixSurprise", "MithrixSurprise", "1.0.5")]
 	public class MithrixSurprise : BaseUnityPlugin
 	{
-		private ConfigFile RoRConfig { get; set; }
-		private ConfigEntry<float> probability;
-		private SpawnCard theBoi = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Brother/cscBrother.asset").WaitForCompletion();
+		private static ConfigFile RoRConfig { get; set; }
+		internal static ConfigEntry<float> probability;
+		private static SpawnCard theBoi = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Brother/cscBrother.asset").WaitForCompletion();
 		
 		public void Awake()
 		{
 			RoRConfig = new ConfigFile(Paths.ConfigPath + "\\MithrixSurprise.cfg", true);
 			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.005f, "Mithrix spawn chance.");
 			if (RoO.Enabled) RoO.AddOptions(probability);
+			if (RoO.Enabled) RoO.AddOptions();
 			On.RoR2.PurchaseInteraction.OnInteractionBegin += PurchaseInteraction_OnInteractionBegin;
 		}
 		
-		private void PurchaseInteraction_OnInteractionBegin(On.RoR2.PurchaseInteraction.orig_OnInteractionBegin orig, PurchaseInteraction self, Interactor activator)
+		private static void PurchaseInteraction_OnInteractionBegin(On.RoR2.PurchaseInteraction.orig_OnInteractionBegin orig, PurchaseInteraction self, Interactor activator)
 		{
 			if (self.CanBeAffordedByInteractor(activator))
 			{
@@ -37,7 +38,7 @@ namespace MithrixSurprise
 			orig(self, activator);
 		}
 		
-		private void SpawnTheBoi(CharacterBody activatorBody)
+		private static void SpawnTheBoi(CharacterBody activatorBody)
 		{
 			SpawnCard spawnCard = theBoi;
 			Transform coreTransform = activatorBody.coreTransform;
