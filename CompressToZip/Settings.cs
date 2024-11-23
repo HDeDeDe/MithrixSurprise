@@ -3,7 +3,7 @@ using System.Collections;
 internal static class Settings {
 //-----------------------------------------------------Customize--------------------------------------------------------
     // ReSharper disable once InconsistentNaming
-    public const bool giveMePDBs = false;
+    public const bool giveMePDBs = true;
     public const bool weave = false;
 
     public const string pluginName = "MithrixSurprise";

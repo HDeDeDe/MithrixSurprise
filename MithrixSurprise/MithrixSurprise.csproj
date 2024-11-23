@@ -7,9 +7,12 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
         <NoWarn>1701;1702;NU1701</NoWarn>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <NoWarn>1701;1702;NU1701</NoWarn>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DebugSymbols>true</DebugSymbols>
     </PropertyGroup>
 
     <ItemGroup>
