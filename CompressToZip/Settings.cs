@@ -7,7 +7,7 @@ internal static class Settings {
     public const bool weave = false;
 
     public const string pluginName = "MithrixSurprise";
-    public const string pluginAuthor = "Nuxlar";
+    public const string pluginAuthor = "HDeDeDe";
     public const string pluginVersion = "1.0.5";
     public const string changelog = "";
     public const string readme = "../README.md";
@@ -21,7 +21,7 @@ internal static class Settings {
     public static readonly ArrayList extraFiles = new() {
     };
 
-    public const string manifestWebsiteUrl = "";
+    public const string manifestWebsiteUrl = "https://github.com/HDeDeDe/MithrixSurprise";
 
     public const string manifestDescription =
         "Anytime you purchase anything there's a small chance you'll get a visitor.";
