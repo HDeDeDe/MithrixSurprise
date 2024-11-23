@@ -27,7 +27,7 @@ namespace MithrixSurprise
 		{
 			if (self.CanBeAffordedByInteractor(activator))
 			{
-				if (Random.value < probability.Value)
+				if (RoR2Application.rng.RangeFloat(0f, 1f) < probability.Value)
 				{
 					SpawnTheBoi(activator.GetComponent<CharacterBody>());
 				}
