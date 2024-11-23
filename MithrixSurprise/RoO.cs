@@ -12,7 +12,7 @@ namespace MithrixSurprise {
         public static void AddOptions() {
             ModSettingsManager.AddOption(new StepSliderOption(MithrixSurprise.probability, new StepSliderConfig
             {
-                min = 0.005f,
+                min = 0f,
                 max = 1f,
                 increment = 0.005f
             }));
