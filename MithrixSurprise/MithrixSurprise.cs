@@ -19,7 +19,7 @@ namespace MithrixSurprise
 		{
 			RoRConfig = new ConfigFile(Paths.ConfigPath + "\\MithrixSurprise.cfg", true);
 			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.005f, "Mithrix spawn chance.");
-			if (RoO.Enabled) RoO.AddOptions(probability);
+			System.Math.Clamp(probability.Value, 0f, 1f);
 			if (RoO.Enabled) RoO.AddOptions();
 			On.RoR2.PurchaseInteraction.OnInteractionBegin += PurchaseInteraction_OnInteractionBegin;
 		}
