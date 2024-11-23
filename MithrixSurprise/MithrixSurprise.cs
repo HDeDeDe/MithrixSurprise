@@ -18,8 +18,15 @@ namespace MithrixSurprise
 		public void Awake()
 		{
 			RoRConfig = new ConfigFile(Paths.ConfigPath + "\\MithrixSurprise.cfg", true);
-			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.005f, "Mithrix spawn chance.");
-			System.Math.Clamp(probability.Value, 0f, 1f);
+			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.5f, "Mithrix spawn chance.");
+			
+			if (!System.IO.File.Exists(Paths.ConfigPath + "\\MithrixSurpriseFirstRun.cfg")) {
+				// ReSharper disable once CompareOfFloatsByEqualityOperator
+				if (probability.Value != (float)probability.DefaultValue) probability.Value *= 100f;
+				System.IO.File.Create(Paths.ConfigPath + "\\MithrixSurpriseFirstRun.cfg");
+			}
+			
+			System.Math.Clamp(probability.Value, 0f, 100f);
 			if (RoO.Enabled) RoO.AddOptions();
 			On.RoR2.PurchaseInteraction.OnInteractionBegin += PurchaseInteraction_OnInteractionBegin;
 		}
