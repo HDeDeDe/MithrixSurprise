@@ -1,5 +1,11 @@
 # MithrixSurprise
 
+This is a reimplementation of Nuxular's [MithrixSurprise](https://thunderstore.io/package/Nuxlar/MithrixSurprise/) mod with some changes. If Nuxular wishes to resume the project themselves I will deprecate this.
+
+![Confirmation](https://github.com/HDeDeDe/MithrixSurprise/blob/main/Resources/confirmation.png?raw=true)
+
+## Description
+
 Anytime you buy or print anything (PurchaseInteraction) there's a small chance you'll be visited by ol boi Mitchell. Probability is configurable, base is 0.5% chance. Made this so there's always a looming threat of Mithrix getting a lil too eager and droppin in from the moon.
 
 ## Changelog
