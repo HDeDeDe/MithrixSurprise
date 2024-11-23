@@ -13,7 +13,8 @@ namespace MithrixSurprise
 	{
 		private static ConfigFile RoRConfig { get; set; }
 		internal static ConfigEntry<float> probability;
-		private static SpawnCard theBoi = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Brother/cscBrother.asset").WaitForCompletion();
+		private static readonly SpawnCard theBoi = 
+			Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Brother/cscBrother.asset").WaitForCompletion();
 		
 		public void Awake()
 		{
