@@ -1,6 +1,6 @@
 # MithrixSurprise
 
-This is a reimplementation of Nuxular's [MithrixSurprise](https://thunderstore.io/package/Nuxlar/MithrixSurprise/) mod with some changes. If Nuxular wishes to resume the project themselves I will deprecate this.
+This is a reimplementation of Nuxular's [MithrixSurprise](https://thunderstore.io/package/Nuxlar/MithrixSurprise/) mod with some changes. If Nuxlar wishes to resume the project themselves I will deprecate this.
 
 ![Confirmation](https://github.com/HDeDeDe/MithrixSurprise/blob/main/Resources/confirmation.png?raw=true)
 
