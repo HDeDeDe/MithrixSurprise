@@ -8,7 +8,7 @@ internal static class Settings {
 
     public const string pluginName = "MithrixSurprise";
     public const string pluginAuthor = "Nuxlar";
-    public const string pluginVersion = "1.0.4";
+    public const string pluginVersion = "1.0.5";
     public const string changelog = "";
     public const string readme = "../README.md";
 
@@ -27,7 +27,6 @@ internal static class Settings {
         "Anytime you purchase anything there's a small chance you'll get a visitor.";
 
     public const string manifestDependencies = "[\n" +
-                                               "\t\t\"Rune580-Risk_Of_Options-2.7.0\",\n" +
                                                "\t\t\"bbepis-BepInExPack-5.4.2111\",\n" +
                                                "\t\t\"RiskofThunder-HookGenPatcher-1.2.3\"\n" +
                                                "\t]";

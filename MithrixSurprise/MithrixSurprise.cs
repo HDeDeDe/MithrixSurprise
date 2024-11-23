@@ -1,8 +1,5 @@
 using BepInEx;
 using BepInEx.Configuration;
-using RiskOfOptions;
-using RiskOfOptions.OptionConfigs;
-using RiskOfOptions.Options;
 using RoR2;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -10,22 +7,19 @@ using UnityEngine.Networking;
 
 namespace MithrixSurprise
 {
-	[BepInPlugin("com.Nuxlar.MithrixSurprise", "MithrixSurprise", "1.0.4")]
+	[BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInPlugin("com.Nuxlar.MithrixSurprise", "MithrixSurprise", "1.0.5")]
 	public class MithrixSurprise : BaseUnityPlugin
 	{
 		private ConfigFile RoRConfig { get; set; }
+		private ConfigEntry<float> probability;
+		private SpawnCard theBoi = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Brother/cscBrother.asset").WaitForCompletion();
 		
 		public void Awake()
 		{
 			RoRConfig = new ConfigFile(Paths.ConfigPath + "\\MithrixSurprise.cfg", true);
 			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.005f, "Mithrix spawn chance.");
-			ModSettingsManager.AddOption(new StepSliderOption(this.probability, new StepSliderConfig
-			{
-				min = 0.005f,
-				max = 1f,
-				increment = 0.005f
-			}));
-			ModSettingsManager.SetModDescription("Goodbye Moon Man");
+			if (RoO.Enabled) RoO.AddOptions(probability);
 			On.RoR2.PurchaseInteraction.OnInteractionBegin += PurchaseInteraction_OnInteractionBegin;
 		}
 		
@@ -65,9 +59,5 @@ namespace MithrixSurprise
 			}
 			NetworkServer.Spawn(gameObject);
 		}
-		
-		private ConfigEntry<float> probability;
-		
-		private SpawnCard theBoi = Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Brother/cscBrother.asset").WaitForCompletion();
 	}
 }

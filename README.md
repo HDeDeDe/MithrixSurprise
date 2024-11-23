@@ -4,6 +4,10 @@ Anytime you buy or print anything (PurchaseInteraction) there's a small chance y
 
 ## Changelog
 
+**1.0.5**
+
+- Risk of Options is now an optional dependency
+
 **1.0.4**
 
 - Adds Risk of Options support
