@@ -14,6 +14,7 @@ Anytime you buy or print anything (PurchaseInteraction) there's a small chance y
 
 - Risk of Options is now an optional dependency
 - Minimum chance can now be set to 0, preventing Mithrix from spawning.
+- Probability is now a value between 0 and 100.
 
 **1.0.4**
 

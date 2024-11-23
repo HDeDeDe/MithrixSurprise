@@ -13,8 +13,9 @@ namespace MithrixSurprise {
             ModSettingsManager.AddOption(new StepSliderOption(MithrixSurprise.probability, new StepSliderConfig
             {
                 min = 0f,
-                max = 1f,
-                increment = 0.005f
+                max = 100f,
+                increment = 0.25f,
+                FormatString = "{0}%"
             }));
             ModSettingsManager.SetModDescription("Goodbye Moon Man");
         }
