@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 namespace MithrixSurprise
 {
 	[BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
-	[BepInPlugin("com.Nuxlar.MithrixSurprise", "MithrixSurprise", "1.0.5")]
+	[BepInPlugin("com.Nuxlar.MithrixSurprise", "MithrixSurprise", "1.0.6")]
 	public class MithrixSurprise : BaseUnityPlugin
 	{
 		private static ConfigFile RoRConfig { get; set; }
@@ -17,11 +17,20 @@ namespace MithrixSurprise
 		private static SpawnCard theBoi = 
 			Addressables.LoadAssetAsync<SpawnCard>("RoR2/Base/Brother/cscBrother.asset").WaitForCompletion();
 		
+		internal static ConfigEntry<float> probabilityFalse;
+		private static readonly RoR2.ExpansionManagement.ExpansionDef dlc2 =
+			Addressables.LoadAssetAsync<RoR2.ExpansionManagement.ExpansionDef>(
+					"RoR2/DLC2/Common/DLC2.asset").WaitForCompletion();
+		private static readonly SpawnCard theFalseBoi = 
+			Addressables.LoadAssetAsync<SpawnCard>("RoR2/DLC2/FalseSonBoss/cscFalseSonBoss.asset").WaitForCompletion();
+		
 		public void Awake()
 		{
 			RoRConfig = new ConfigFile(Paths.ConfigPath + "\\MithrixSurprise.cfg", true);
 			probability = RoRConfig.Bind<float>("General", "Spawn Chance", 0.5f,
 				"Mithrix spawn chance.");
+			probabilityFalse = RoRConfig.Bind<float>("General", "Spawn Chance False Son", 0f,
+				"False Son spawn chance. (Requires SotS)");
 			
 			if (!System.IO.File.Exists(Paths.ConfigPath + "\\MithrixSurpriseFirstRun.cfg")) {
 				// ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -30,7 +39,16 @@ namespace MithrixSurprise
 			}
 			
 			System.Math.Clamp(probability.Value, 0f, 100f);
-			if (RoO.Enabled) RoO.AddOptions();
+			System.Math.Clamp(probabilityFalse.Value, 0f, 100f);
+
+			if (RoO.Enabled) {
+				string iconPath = System.Reflection.Assembly
+					.GetExecutingAssembly().Location.Replace("MithrixSurprise.dll", "icon.png");
+				Logger.LogFatal(iconPath);
+				if (!System.IO.File.Exists(iconPath)) iconPath = "";
+				RoO.AddOptions(iconPath);
+			}
+			
 			On.RoR2.PurchaseInteraction.OnInteractionBegin += PurchaseInteraction_OnInteractionBegin;
 		}
 		
@@ -41,17 +59,25 @@ namespace MithrixSurprise
 			{
 				if (RoR2Application.rng.RangeFloat(0f, 1f) < (probability.Value / 100f))
 				{
-					SpawnTheBoi(activator.GetComponent<CharacterBody>());
+					SpawnTheBoi(activator.GetComponent<CharacterBody>(), theBoi);
 				}
+				
+				if (!Run.instance.IsExpansionEnabled(dlc2)) {
+					orig(self, activator);
+					return;
+				}
+				if (RoR2Application.rng.RangeFloat(0f, 1f) < (probabilityFalse.Value / 100f)) {
+					SpawnTheBoi(activator.GetComponent<CharacterBody>(), theFalseBoi);
+				}
+				
 				orig(self, activator);
 				return;
 			}
 			orig(self, activator);
 		}
 		
-		private static void SpawnTheBoi(CharacterBody activatorBody)
+		private static void SpawnTheBoi(CharacterBody activatorBody, SpawnCard spawnCard)
 		{
-			SpawnCard spawnCard = theBoi;
 			Transform coreTransform = activatorBody.coreTransform;
 			DirectorCore.MonsterSpawnDistance input = DirectorCore.MonsterSpawnDistance.Far;
 			DirectorPlacementRule directorPlacementRule = new DirectorPlacementRule
