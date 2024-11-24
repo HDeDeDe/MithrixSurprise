@@ -8,7 +8,7 @@ internal static class Settings {
 
     public const string pluginName = "MithrixSurprise";
     public const string pluginAuthor = "HDeDeDe";
-    public const string pluginVersion = "1.0.5";
+    public const string pluginVersion = "1.0.6";
     public const string changelog = "";
     public const string readme = "../README.md";
 

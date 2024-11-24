@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 namespace MithrixSurprise
 {
 	[BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
-	[BepInPlugin("com.Nuxlar.MithrixSurprise", "MithrixSurprise", "1.0.5")]
+	[BepInPlugin("com.Nuxlar.MithrixSurprise", "MithrixSurprise", "1.0.6")]
 	public class MithrixSurprise : BaseUnityPlugin
 	{
 		private static ConfigFile RoRConfig { get; set; }

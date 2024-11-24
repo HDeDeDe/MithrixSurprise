@@ -10,6 +10,11 @@ Anytime you buy or print anything (PurchaseInteraction) there's a small chance y
 
 ## Changelog
 
+**1.0.6**
+
+- Options now has an icon
+- Fredrick Sonbert can now decide to drop in. Requires letting Gearbox into your life. Defaults to a 0% chance
+
 **1.0.5**
 
 - Risk of Options is now an optional dependency
