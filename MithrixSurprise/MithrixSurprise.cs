@@ -42,6 +42,10 @@ namespace MithrixSurprise
 			System.Math.Clamp(probabilityFalse.Value, 0f, 100f);
 
 			if (RoO.Enabled) {
+				string iconPath = System.Reflection.Assembly
+					.GetExecutingAssembly().Location.Replace("MithrixSurprise.dll", "icon.png");
+				Logger.LogFatal(iconPath);
+				if (!System.IO.File.Exists(iconPath)) iconPath = "";
 				RoO.AddOptions(iconPath);
 			}
 			
